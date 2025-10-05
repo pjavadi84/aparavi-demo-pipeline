@@ -1,52 +1,148 @@
-# Aparavi Demo Pipeline (v1)
+# Aparavi Demo — React + React Flow UI
 
-> A simplified low-code data pipeline showing how unstructured data flows through discovery, classification, policy enforcement, and AI summarization (RAG).  
-> Built with **FastAPI**, **Node.js**, and a lightweight **HTML UI**.
-
-### Overview
-This demo simulates how Aparavi’s Data Toolchain for AI handles unstructured files:
-1. **Ingest** – Discover files & extract metadata.  
-2. **Classify** – Detect PII (e.g., SSNs, emails).  
-3. **Policy** – Apply governance rules (e.g., quarantine).  
-4. **RAG** – Generate context-aware summaries.
-
-### Tech Stack
-- Python FastAPI  
-- Node.js + Express  
-- Vanilla JS / HTML UI  
-- Regex-based PII detection  
-- Mock embeddings for RAG summarization  
+This project provides a visual representation of the **Aparavi-style unstructured data pipeline**, built using **React**, **React Flow**, and **Tailwind CSS**. It connects with FastAPI microservices for ingestion, classification, policy enforcement, and RAG (Retrieval-Augmented Generation) summarization.
 
 ---
 
-### 🚀 How to Run
+## 🧠 Architecture Overview
+
+```text
++----------------+      +----------------+      +----------------+      +----------------+
+|   Discover     | ---> |   Classify     | ---> |    Policy      | ---> |      RAG       |
+|  (FastAPI)     |      |  (FastAPI)     |      |  (FastAPI)     |      |  (FastAPI)     |
++----------------+      +----------------+      +----------------+      +----------------+
+        |                     |                      |                       |
+        |                     |                      |                       |
+        +----------> React Flow UI visual pipeline <--------------------------+
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
 ```bash
-# Terminal 1 - Ingest
+git clone https://github.com/pjavadi84/aparavi-demo-toolchain-v1.git
+cd aparavi-demo-toolchain-v1/react-flow-ui
+```
+
+### 2️⃣ Install Dependencies
+Make sure you’re using **Node ≥ 20.19.0**.
+
+```bash
+npm install
+```
+
+If you see `could not determine executable to run` or missing Tailwind binary, upgrade npm and reinstall:
+```bash
+npm install -g npm@latest
+npm install -D tailwindcss@3.4.13 postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### 3️⃣ Configure Tailwind
+Ensure these files exist:
+
+**`tailwind.config.js`**
+```js
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: { extend: {} },
+  plugins: [],
+};
+```
+
+**`src/index.css`**
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Import this in `src/main.tsx`:
+```ts
+import './index.css';
+```
+
+### 4️⃣ Start the Frontend
+```bash
+npm run dev
+```
+Then open **http://localhost:5175**.
+
+---
+
+## ⚙️ Backend Setup
+In the project root (`aparavi-demo-toolchain-v1`), start all FastAPI services:
+
+```bash
+# Terminal 1
 cd services/ingest
-uvicorn main:app --port 8001
+uvicorn main:app --reload --port 8001
 
-# Terminal 2 - Policy
-cd services/policy
-node index.js
+# Terminal 2
+cd ../policy
+uvicorn main:app --reload --port 8002
 
-# Terminal 3 - AI
-cd services/ai
-uvicorn main:app --port 8003
+# Terminal 3
+cd ../rag
+uvicorn main:app --reload --port 8003
+```
 
-# Then open apps/web/index.html
-
-
----
-
-### ✅ 4. Verify
-
-Then visit:  
-👉 **https://github.com/pjavadi84/aparavi-demo-pipeline**
-
-You should see your folders + README beautifully formatted.
+Each endpoint serves part of the pipeline:
+- **/discover** → scans `data/sample_files/`
+- **/classify** → tags PII (emails, SSNs)
+- **/apply** → enforces policies like QuarantineSSN
+- **/rag** → summarizes content using simulated embeddings
 
 ---
 
-Would you like me to help you write a short, professional **GitHub project description** (for the top of your repo page and LinkedIn post)?  
-Something like *“A lightweight AI data governance pipeline inspired by Aparavi’s unstructured data management stack.”*
+## 🧩 UI Features
+✅ Interactive flow built with **React Flow**  
+✅ Live status transitions (`running`, `done`, `error`)  
+✅ Real-time logs and FastAPI fetch results  
+✅ Tailwind-based clean design  
+✅ Auto-scroll and status updates for each node
 
+---
+
+## 🧠 Example Run
+When you click **Run Pipeline**:
+1. The system discovers local sample documents.
+2. Detects PII (emails, SSNs).
+3. Applies policies (e.g., quarantine).
+4. Generates an AI-based summary via RAG.
+
+Example log output:
+```bash
+📂 Discover complete
+🔍 Classification complete
+⚙️ Apply result: {"applied": [{"file": "contract.txt", "action": "quarantine"}]}
+🤖 RAG answer: Executive Summary ...
+```
+
+---
+
+## 📸 Demo Preview
+![Aparavi Demo UI Screenshot](./docs/screenshot.png)
+_The pipeline nodes animate through stages as backend responses stream in._
+
+---
+
+## 🧱 Tech Stack
+- **Frontend:** React + Vite + React Flow + TailwindCSS
+- **Backend:** FastAPI (Python)
+- **Visualization:** React Flow
+- **Policy & RAG Logic:** Simulated ML classification + regex PII detection
+
+---
+
+## 👨‍💻 Author
+**Pouya Javadi**  
+Software Engineer @ Meta | Building human-centered AI tools  
+[LinkedIn](https://linkedin.com/in/pouyajavadi)
+
+---
+
+## 📄 License
+MIT © 2025 Pouya Javadi
