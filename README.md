@@ -145,4 +145,4 @@ Software Engineer @ Meta | Building human-centered AI tools
 ---
 
 ## 📄 License
-MIT © 2025 Pouya Javadi
+Released under the [MIT License](./LICENSE) © 2025 Pouya Javadi
