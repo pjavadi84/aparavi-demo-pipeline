@@ -1,0 +1,15 @@
+January 2023 Statement
+Account: Northwind Holdings
+Prepared by: finance-reports@example.com
+
+Summary
+-------
+Opening Balance: $1,254,320.12
+Receivables Posted: $142,910.00
+Disbursements: $98,430.42
+Closing Balance: $1,298,799.70
+
+Notes
+-----
+- Outstanding invoice INV-2301 is aging past 45 days.
+- Treasury to validate FX adjustments from GBP subsidiary.

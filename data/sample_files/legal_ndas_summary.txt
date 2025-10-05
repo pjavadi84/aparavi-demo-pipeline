@@ -1,0 +1,8 @@
+NDA Summary Log
+---------------
+File Owner: legal-ops@example.com
+
+Highlights
+1. Five NDAs renewed with key suppliers; all include 24-month confidentiality clauses.
+2. One pending NDA for Atlas Analytics awaiting signature from cto@atlasanalytics.com.
+3. Reminder: track jurisdictional differences for German partners.

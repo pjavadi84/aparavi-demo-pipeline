@@ -1,0 +1,10 @@
+Approved Vendors List (Excerpt)
+-------------------------------
+Owner: sourcing-team@example.com
+
+Vendors
+1. Vertex Logistics — Primary freight partner — contact: logistics@vertex.com
+2. Brightline Office Supply — Preferred tier — contact: orders@brightlineoffice.com
+3. SilverLeaf Security — Managed SOC — contact: socdesk@silverleafsec.com
+
+Next Review: 2024-06-30

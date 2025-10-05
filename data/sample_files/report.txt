@@ -1,0 +1,29 @@
+Executive Summary
+------------------
+The Aparavi pilot ingested 1,257 documents across finance, legal, and operations. The goal of this internal test was to validate that automated classification, policy remediation, and lightweight RAG summarization can coexist in a single workflow without overloading the analyst team.
+
+Observations
+------------
+1. Finance archives contain 412 monthly statements created between 2019 and 2023. A predictable structure allowed high-confidence extraction of totals and outstanding balances. The ingest service flagged 9 statements with legacy account numbers that follow the `AAA-9999` format. No Social Security Numbers were detected in this set.
+2. Legal documents contributed 287 contracts. Roughly 18% included personally identifiable information such as signatory emails or masked tax identifiers. Quarantine actions triggered on each SSN reference, guaranteeing compliance with the corporate retention schedule.
+3. Operations folders produced 558 maintenance reports. These documents are dense but structured. The pipeline captured date stamps, asset identifiers, and incident summaries without introducing new policy hits.
+
+Performance Metrics
+-------------------
+- Average discover step latency: 180ms on a 2021 MacBook Pro (M1, 16GB RAM).
+- Classification with regex-driven detectors: 240ms per batch of 100 files.
+- Policy apply phase: 310ms when 5 policies and 3 concurrent matches exist.
+- RAG summarization: 95ms end-to-end using the hash-bucket embedding baseline.
+
+Analyst Feedback
+----------------
+"The quarantine workflow mirrored what we do by hand, but faster." — Compliance Analyst
+"Being able to ask quick questions like 'Summarize month-end variances' saved us time." — FP&A Lead
+
+Next Steps
+----------
+- Expand detection patterns to cover IBAN and routing numbers.
+- Transition from regex-only classification to ML-backed NER for improved recall.
+- Consider integrating the RAG endpoint with a more semantic embedding model to reduce hallucination risk.
+
+End of Report

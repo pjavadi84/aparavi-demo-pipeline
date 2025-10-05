@@ -1,0 +1,9 @@
+HR Onboarding Notes
+-------------------
+Candidate: Jordan Lee (jordan.lee@example.com)
+Start Date: 2024-02-05
+
+Tasks
+- Provision laptop and MFA access.
+- Schedule security awareness training within first week.
+- Confirm SSN 123-45-6789 was captured correctly in payroll system.

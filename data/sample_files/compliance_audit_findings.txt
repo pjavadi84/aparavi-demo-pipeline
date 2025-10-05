@@ -1,0 +1,12 @@
+Compliance Audit Findings
+-------------------------
+Auditor: maureen.suarez@example.com
+
+Findings
+1. Access reviews completed for 92% of privileged accounts.
+2. Two outstanding remediation tickets: IAM-4412, IAM-4413.
+3. Need proof of policy enforcement for documents tagged PII:EMAIL.
+
+Recommendations
+- Automate quarterly attestations via GRC tool.
+- Provide evidence exports by next audit checkpoint.

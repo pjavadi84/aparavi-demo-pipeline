@@ -1,0 +1,12 @@
+Release Notes: Platform v2.4.7
+------------------------------
+Maintainer: release.engineering@example.com
+
+Key Changes
+- Added audit logging hooks for data export jobs.
+- Improved retry logic in policy engine connectors.
+- Deprecated legacy SOAP endpoint; clients must migrate to REST by Q3.
+
+Quality Assurance
+- 214 automated tests executed, 0 failures.
+- Manual regression on storage adapters completed.

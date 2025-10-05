@@ -1,0 +1,13 @@
+Training Feedback Survey — January Cohort
+----------------------------------------
+Coordinator: learning@aparavi-demo.com
+
+Highlights
+- Average satisfaction score: 4.6 / 5
+- Favorite module: Automated policy enforcement demo.
+- Improvement request: Longer hands-on lab for classification tuning.
+
+Selected Comments
+"Useful overview with practical examples." — Analyst, EMEA
+"Would love deeper dive on regex strategies." — Compliance partner
+"Sample PII scenarios like SSN 987-65-4320 clarified the policy steps." — Training participant

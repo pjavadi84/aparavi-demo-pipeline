@@ -1,0 +1,13 @@
+Campaign Results: Winter Warmup 2024
+-----------------------------------
+Owner: marketing.analytics@example.com
+
+Metrics
+- Emails sent: 52,000
+- Open rate: 38%
+- Click-to-open: 14%
+- Conversion: 3.2%
+
+Audience Feedback
+- Positive responses referencing the bundled maintenance offer.
+- Complaints around outdated pricing on legacy screens.

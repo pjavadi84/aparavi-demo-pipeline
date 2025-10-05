@@ -1,0 +1,12 @@
+Incident Report 2024-01-18
+--------------------------
+Author: operations-desk@example.com
+
+Incident Details
+- Impacted system: Warehouse scanner subsystem
+- Root cause: Misconfigured firmware after overnight patch
+- Resolution: Rolled back to stable build; scheduled validation tests
+
+Follow-up Actions
+- Document firmware change procedure.
+- Add monitoring alert for checksum mismatch events.

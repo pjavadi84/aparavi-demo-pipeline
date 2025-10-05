@@ -1,0 +1,13 @@
+Sales Pipeline Snapshot — February 2024
+--------------------------------------
+Prepared by: revenue.ops@example.com
+
+Stages
+- Prospecting: 38 deals / $4.1M
+- Qualification: 21 deals / $3.6M
+- Proposal: 12 deals / $2.4M
+- Negotiation: 6 deals / $1.8M
+
+Notes
+- Top deal: Horizon Foods renewal (Owner: kelly.park@example.com).
+- Watch churn risk on Globex maintenance contract.

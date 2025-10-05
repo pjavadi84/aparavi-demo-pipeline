@@ -1,0 +1,13 @@
+Customer Support Transcript
+---------------------------
+Ticket #104
+Reporter: malia.andrews@example.com
+Summary: Customer cannot locate archived invoices from Q2. Requested confirmation that retention policies keep digital copies for seven years. No payment data in scope.
+
+Ticket #105
+Reporter: charles.nguyen@example.com
+Summary: Requested deletion of duplicate account records created after the April migration. Provided case numbers 5521-A and 5521-B for follow-up.
+
+Ticket #106
+Reporter: helpdesk escalation
+Summary: Legacy CRM export includes columns with placeholder values like XXX-XX-9999. Compliance wants to verify no actual SSNs were shipped. Awaiting confirmation from data governance.
