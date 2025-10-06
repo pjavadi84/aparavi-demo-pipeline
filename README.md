@@ -1,5 +1,11 @@
 # Aparavi Demo — React + React Flow UI
 
+Built this project as a learning and demonstration tool, not as a copy of Aparavi’s product. My goal was to explore unstructured‑data management end‑to‑end—ingesting files, detecting sensitive data, applying governance policies, and preparing AI‑ready inputs—because these are the problems Aparavi solves
+aparavi.com
+. Implementing the pipeline myself in Python, Node.js and React (with a visual, low‑code interface) shows that I understand the data life cycle and can build full‑stack solutions that meet Aparavi’s mission of cleaning, organizing and automating unstructured data
+aparavi.com
+. This prototype also provides a platform for future integration with Aparavi’s SDK, demonstrating my intent to extend and adapt the project rather than simply replicating an existing product.
+
 This project provides a visual representation of the **Aparavi-style unstructured data pipeline**, built using **React**, **React Flow**, and **Tailwind CSS**. It connects with FastAPI microservices for ingestion, classification, policy enforcement, and RAG (Retrieval-Augmented Generation) summarization.
 
 ---
