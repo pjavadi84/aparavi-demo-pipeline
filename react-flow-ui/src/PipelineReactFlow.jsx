@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState } from "reactflow";
+import ReactFlow, {
+  Background,
+  Controls,
+  MiniMap,
+  useEdgesState,
+  useNodesState,
+} from "reactflow";
 import "reactflow/dist/style.css";
 
 const Pill = ({ label, tone = "idle" }) => (
@@ -45,7 +51,8 @@ const nodeTypes = { default: NodeCard };
 export default function PipelineReactFlow() {
   const [logs, setLogs] = useState("");
   const logRef = useRef(null);
-  const append = (line) => setLogs((s) => s + (s ? "\n" : "") + line);
+  const append = (line) => setLogs((s) => (s ? `${s}\n${line}` : line));
+
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [logs]);
@@ -59,6 +66,7 @@ export default function PipelineReactFlow() {
     ],
     []
   );
+
   const initialEdges = useMemo(
     () => [
       { id: "e1", source: "discover", target: "classify", animated: true },
@@ -67,11 +75,14 @@ export default function PipelineReactFlow() {
     ],
     []
   );
+
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   const setStatus = (id, status, detail) => {
-    setNodes((nds) => nds.map((n) => (n.id === id ? { ...n, data: { ...n.data, status, detail } } : n)));
+    setNodes((nds) =>
+      nds.map((n) => (n.id === id ? { ...n, data: { ...n.data, status, detail } } : n))
+    );
   };
 
   const ensurePolicy = async () => {
@@ -97,48 +108,61 @@ export default function PipelineReactFlow() {
     setStatus("classify", "idle");
     setStatus("policy", "idle");
     setStatus("rag", "idle");
+
     try {
-      await fetch("http://localhost:8001/discover", { method: "POST" });
+      const d = await fetch("http://localhost:8001/discover", { method: "POST" });
+      append(`📂 Discover: HTTP ${d.status}`);
+      if (!d.ok) throw new Error(`discover failed: ${d.status}`);
       setStatus("discover", "done");
-      append("📂 Discover complete");
 
       setStatus("classify", "running");
-      await fetch("http://localhost:8001/classify", { method: "POST" });
+      const c = await fetch("http://localhost:8001/classify", { method: "POST" });
+      append(`🔍 Classify: HTTP ${c.status}`);
+      if (!c.ok) throw new Error(`classify failed: ${c.status}`);
       setStatus("classify", "done");
-      append("🔍 Classification complete");
 
       setStatus("policy", "running");
       await ensurePolicy();
       const appRes = await fetch("http://localhost:8002/apply", { method: "POST" });
-      const appJson = await appRes.json();
+      append(`⚙️ Apply: HTTP ${appRes.status}`);
+      const appJson = await appRes.json().catch(() => ({}));
       setStatus("policy", "done", `${(appJson.applied || []).length} action(s)`);
       append("⚙️ Apply result: " + JSON.stringify(appJson));
 
-      setStatus("rag", "running");
-      const idx = await (await fetch("http://localhost:8001/index")).json();
+      const idxRes = await fetch("http://localhost:8001/index");
+      append(`📁 Index: HTTP ${idxRes.status}`);
+      const idx = await idxRes.json().catch(() => ({ index: {} }));
       const docs = Object.values(idx.index || {});
+      append(`📊 Docs available for RAG: ${docs.length}`);
       if (!docs.length) {
         setStatus("rag", "done", "0 docs");
         append("⚠️ No documents remain after policy actions");
         return;
       }
-      const rag = await (
-        await fetch("http://localhost:8003/rag", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            question: "Summarize contracts and invoices with any PII mentions",
-            docs,
-            k: 3,
-          }),
-        })
-      ).json();
+
+      setStatus("rag", "running");
+      const ragRes = await fetch("http://localhost:8003/rag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: "Summarize contracts and invoices with any PII mentions",
+          docs,
+          k: 3,
+        }),
+      });
+      append(`🧠 RAG: HTTP ${ragRes.status}`);
+      const rag = await ragRes.json().catch(async () => {
+        const text = await ragRes.text();
+        throw new Error(`rag parse failed: ${text.slice(0, 200)}`);
+      });
       setStatus("rag", "done", "answer ready");
-      append("🤖 RAG answer:\n" + rag.answer);
+      append("🤖 RAG answer:\n" + (rag.answer || "<no answer field>"));
     } catch (e) {
       append("❌ Pipeline error: " + (e?.message || e));
       setNodes((nds) =>
-        nds.map((n) => (n.data.status === "running" ? { ...n, data: { ...n.data, status: "error" } } : n))
+        nds.map((n) =>
+          n.data.status === "running" ? { ...n, data: { ...n.data, status: "error" } } : n
+        )
       );
     }
   }, [setNodes]);
@@ -147,7 +171,9 @@ export default function PipelineReactFlow() {
     <div className="h-[100vh] w-full bg-slate-50">
       <div className="mx-auto max-w-[1100px] p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-slate-800">Aparavi-Style Pipeline (React + React Flow)</h1>
+          <h1 className="text-xl font-bold text-slate-800">
+            Aparavi-Style Pipeline (React + React Flow)
+          </h1>
           <button
             onClick={run}
             className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700"

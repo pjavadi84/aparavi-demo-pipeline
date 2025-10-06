@@ -1,10 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import PipelineReactFlow from './PipelineReactFlow'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css"; // <-- Tailwind is applied through PostCSS here
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <PipelineReactFlow />
-  </StrictMode>,
-)
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
